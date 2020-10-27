@@ -12,17 +12,16 @@ import androidx.room.PrimaryKey;
     foreignKeys = {
         @ForeignKey(
             entity = Student.class,
-            parentColumns = "id",
-            childColumns = "studentId"
+            parentColumns = "student_id",
+            childColumns = "student_id"
         ),
         @ForeignKey(
             entity = Contact.class,
-            parentColumns = "id",
-            childColumns = "contactId"
+            parentColumns = "contact_id",
+            childColumns = "contact_id"
         )
     },
     indices = {
-        @Index(value = "relationship", unique = true), // Should this be removed like in Student?
         @Index(value = {"student_id", "contact_id"}, unique = true)
     }
 )
@@ -41,7 +40,7 @@ public class StudentContact {
   private boolean primary;
 
   @NonNull
-  @ColumnInfo(name = "relationship_type")
+  @ColumnInfo(name = "relationship_type", index = true)
   private Relationship relationship;
 
   public long getId() {
