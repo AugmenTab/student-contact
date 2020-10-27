@@ -6,6 +6,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 
 @SuppressWarnings("NotNullFieldNotInitialized")
 @Entity(
@@ -87,6 +88,17 @@ public class StudentContact {
 
   public enum Relationship {
     PARENT, GUARDIAN, SIBLING, OTHER;
+
+    @TypeConverter
+    public String enumToString(Enum value) {
+      return value == null ? null : value.toString();
+    }
+
+    @TypeConverter
+    public Relationship stringToEnum(String value) {
+      return value == null ? null : Relationship.valueOf(value);
+    }
+
   }
 
 }
